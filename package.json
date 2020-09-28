@@ -1,7 +1,9 @@
 {
     "name": "@yesness/assert",
     "version": "1.0.0",
-    "description": "",
+    "description": "Runtime type assertion",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "files": [
         "lib/**/*"
     ],
@@ -16,7 +18,9 @@
         "type": "git",
         "url": "git+https://github.com/yesness/assert.git"
     },
-    "keywords": [],
+    "keywords": [
+        "assert"
+    ],
     "author": "rcpooley",
     "license": "ISC",
     "bugs": {
