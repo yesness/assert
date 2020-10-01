@@ -21,6 +21,7 @@ describe('assert', () => {
         symbolC: [Symbol(), Symbol],
         symbol: [Symbol(), Symbol()],
         undefined: [undefined, undefined],
+        null: [null, null],
         stringNumber: ['hello', stringNumber],
         stringNumber2: [1, stringNumber],
         stringOrArray: ['hello', stringOrArray],
@@ -46,9 +47,10 @@ describe('assert', () => {
     };
 
     const errorData: {
-        [name: string]: [[any, any], string, string] | [any, any];
+        [name: string]: [[any, any], string, string, string] | [any, any];
     } = {
-        'number-string': [[1, String], 'number', 'string'],
+        'number-string': [[1, String], 'number', 'string', 'root'],
+        null: [[[null], [{ a: 1 }]], 'null', 'object', 'root[0]'],
         stringNumber: [true, stringNumber],
         stringOrArray: [true, stringOrArray],
         stringOrArray2: [[1], stringOrArray],
@@ -71,10 +73,10 @@ describe('assert', () => {
 
             let err = 'None of the types matched:';
             let args: [any, any];
-            if (dat.length === 3) {
-                let [argz, actual, expected] = errorData[name];
+            if (dat.length === 4) {
+                let [argz, actual, expected, root] = errorData[name];
                 args = argz;
-                err = `Expected root to be ${expected}; Actual: ${actual}`;
+                err = `Expected ${root} to be ${expected}; Actual: ${actual}`;
             } else {
                 args = dat;
             }

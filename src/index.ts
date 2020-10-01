@@ -72,6 +72,14 @@ class Assert {
             return;
         }
 
+        // Check null type
+        if (expected === null) {
+            if (actual !== null) {
+                return fail('null');
+            }
+            return;
+        }
+
         // Check for assert object
         if (typeof expected === 'object' && '__assert' in expected) {
             const op = expected.__assert;
@@ -99,7 +107,7 @@ class Assert {
 
         // Check object type
         if (typeof expected === 'object') {
-            if (typeof actual !== 'object') {
+            if (typeof actual !== 'object' || actual === null) {
                 return fail('object');
             }
             Object.keys(expected).forEach((key) => {
